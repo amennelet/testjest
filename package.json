@@ -12,5 +12,8 @@
   "license": "ISC",
   "devDependencies": {
     "jest": "^21.2.1"
+  },
+  "dependencies": {
+    "immutable": "^3.8.2"
   }
 }

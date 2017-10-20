@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
+const { List } = require('immutable');
 
 describe('extracting regex from file', () => {
     it('read all lines from a file', () => {
@@ -11,6 +12,21 @@ describe('extracting regex from file', () => {
         });
         lineReader.on('close', () => {
             expect(470).toBe(totalLine);
+        });
+    });
+    it('filter lines with regex', () => {
+        var list = List();
+        const lineReader = readline.createInterface({ input: fs.createReadStream(path.join(__dirname, 'Allflex_L1InkUnloadTrayProcessor_PLCBugOnReject.log')) });
+        lineReader.on('line', (line) => {
+            /\/I:[0-9,]+/.exec(line).forEach((value) => {
+                if (value) {
+                    list = list.concat([value]);
+                    console.log(value);
+                }
+            });
+        });
+        lineReader.on('close', () => {
+            expect(list.size).toBe(156);
         });
     });
 });
