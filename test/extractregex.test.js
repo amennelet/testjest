@@ -18,12 +18,10 @@ describe('extracting regex from file', () => {
         var list = List();
         const lineReader = readline.createInterface({ input: fs.createReadStream(path.join(__dirname, 'Allflex_L1InkUnloadTrayProcessor_PLCBugOnReject.log')) });
         lineReader.on('line', (line) => {
-            /\/I:[0-9,]+/.exec(line).forEach((value) => {
-                if (value) {
-                    list = list.concat([value]);
-                    console.log(value);
-                }
-            });
+            const result = /\/I:[0-9,]+/.exec(line);
+            if (result !== null) {
+                result.forEach((value) => list = list.concat([value]));
+            }
         });
         lineReader.on('close', () => {
             expect(list.size).toBe(156);
