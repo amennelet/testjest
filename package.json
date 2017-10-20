@@ -1,0 +1,16 @@
+{
+  "name": "testjest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test-watch":"npm test -- --watch"
+  },
+  "keywords": [],
+  "author": "Alexandre Mennelet",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^21.2.1"
+  }
+}
