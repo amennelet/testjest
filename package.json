@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "test-watch":"npm test -- --watch"
+    "test-watch": "npm test -- --watch"
   },
   "keywords": [],
   "author": "Alexandre Mennelet",
