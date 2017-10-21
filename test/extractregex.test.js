@@ -1,27 +1,26 @@
 import fs from 'fs';
 import path from 'path';
 import readline from 'readline';
-import { List } from 'immutable';
 import ExtractRegex from '../module/extractregex';
 
 describe('extracting regex from file', () => {
     it('read all lines from a file', () => {
-        var totalLine = 0;
+        let totalLine = 0;
         const lineReader = readline.createInterface({ input: fs.createReadStream(path.join(__dirname, 'Allflex_L1InkUnloadTrayProcessor_PLCBugOnReject.log')) });
-        lineReader.on('line', (line) => {
-            totalLine++;
+        lineReader.on('line', () => {
+            totalLine += 1;
         });
         lineReader.on('close', () => {
             expect(totalLine).toBe(470);
         });
     });
     it('filter lines with regex', () => {
-        var list = List();
+        const list = [];
         const lineReader = readline.createInterface({ input: fs.createReadStream(path.join(__dirname, 'Allflex_L1InkUnloadTrayProcessor_PLCBugOnReject.log')) });
         lineReader.on('line', (line) => {
             const result = /\/I:[0-9,]+/.exec(line);
             if (result !== null) {
-                result.forEach((value) => list = list.push(value));
+                result.forEach(value => list.push(value));
             }
         });
         lineReader.on('close', () => {
@@ -34,9 +33,9 @@ describe('extracting regex from file', () => {
 
 describe('ExtractRegex', () => {
     it('filter lines with regex from read stream', () => {
-        var list = List();
+        const list = [];
         const extractRegex = new ExtractRegex();
-        extractRegex.on('found', (value) => list = list.push(value));
+        extractRegex.on('found', value => list.push(value));
         extractRegex.parse(fs.createReadStream(path.join(__dirname, 'Allflex_L1InkUnloadTrayProcessor_PLCBugOnReject.log')), /\/I:[0-9,]+/);
         extractRegex.on('close', () => {
             expect(156).toBe(list.size);
@@ -45,9 +44,9 @@ describe('ExtractRegex', () => {
         });
     });
     it('filter lines with regex from file path', () => {
-        var list = List();
+        const list = [];
         const extractRegex = new ExtractRegex();
-        extractRegex.on('found', (value) => list = list.push(value));
+        extractRegex.on('found', value => list.push(value));
         extractRegex.parseFile(path.join(__dirname, 'Allflex_L1InkUnloadTrayProcessor_PLCBugOnReject.log'), /\/I:[0-9,]+/);
         extractRegex.on('close', () => {
             expect(156).toBe(list.size);

@@ -7,16 +7,16 @@ export default class extends EventEmitter {
         this.parse(fs.createReadStream(filePath), regex);
     }
     parse(input, regex) {
-        const lineReader = readline.createInterface({ input: input });
+        const lineReader = readline.createInterface({ input });
         lineReader.on('line', (line) => {
             const result = regex.exec(line);
             if (result !== null) {
                 result.forEach((value) => {
-                    emmit('found', value);
+                    super.emmit('found', value);
                 });
             }
         });
-        lineReader.on('close', () => emmit('close'));
+        lineReader.on('close', () => super.emmit('close'));
     }
 }
 
