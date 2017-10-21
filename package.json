@@ -11,6 +11,8 @@
   "author": "Alexandre Mennelet",
   "license": "ISC",
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "jest": "^21.2.1"
   },
   "dependencies": {

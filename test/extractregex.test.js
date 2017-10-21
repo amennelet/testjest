@@ -1,7 +1,8 @@
-const fs = require('fs');
-const path = require('path');
-const readline = require('readline');
-const { List } = require('immutable');
+import fs from 'fs';
+import path from 'path';
+import readline from 'readline';
+import { List } from 'immutable';
+import ExtractRegex from '../module/extractregex';
 
 describe('extracting regex from file', () => {
     it('read all lines from a file', () => {
@@ -26,6 +27,31 @@ describe('extracting regex from file', () => {
             }
         });
         lineReader.on('close', () => {
+            expect(156).toBe(list.size);
+            expect(list.first()).toBe('/I:0,4107,4099,4099,4099,0,0,0,0,0,0');
+            expect(list.last()).toBe('/I:0,12297,12289,12289,12305,0,0,0,0,0,0');
+        });
+    });
+});
+
+describe('ExtractRegex', () => {
+    it('filter lines with regex from read stream', () => {
+        var list = List();
+        const extractRegex = new ExtractRegex();
+        extractRegex.on('found', (value) => list = list.concat([value]));
+        extractRegex.parse(fs.createReadStream(path.join(__dirname, 'Allflex_L1InkUnloadTrayProcessor_PLCBugOnReject.log')), /\/I:[0-9,]+/);
+        extractRegex.on('close', () => {
+            expect(156).toBe(list.size);
+            expect(list.first()).toBe('/I:0,4107,4099,4099,4099,0,0,0,0,0,0');
+            expect(list.last()).toBe('/I:0,12297,12289,12289,12305,0,0,0,0,0,0');
+        });
+    });
+    it('filter lines with regex from file path', () => {
+        var list = List();
+        const extractRegex = new ExtractRegex();
+        extractRegex.on('found', (value) => list = list.concat([value]));
+        extractRegex.parseFile(path.join(__dirname, 'Allflex_L1InkUnloadTrayProcessor_PLCBugOnReject.log'), /\/I:[0-9,]+/);
+        extractRegex.on('close', () => {
             expect(156).toBe(list.size);
             expect(list.first()).toBe('/I:0,4107,4099,4099,4099,0,0,0,0,0,0');
             expect(list.last()).toBe('/I:0,12297,12289,12289,12305,0,0,0,0,0,0');
