@@ -11,6 +11,7 @@
   "author": "Alexandre Mennelet",
   "license": "ISC",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "eslint": "^4.9.0",
@@ -19,6 +20,6 @@
     "jest": "^21.2.1"
   },
   "dependencies": {
-    "immutable": "^3.8.2"
+    "commander": "^2.11.0"
   }
 }
