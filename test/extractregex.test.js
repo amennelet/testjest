@@ -11,7 +11,7 @@ describe('extracting regex from file', () => {
             totalLine++;
         });
         lineReader.on('close', () => {
-            expect(470).toBe(totalLine);
+            expect(totalLine).toBe(470);
         });
     });
     it('filter lines with regex', () => {
@@ -20,11 +20,15 @@ describe('extracting regex from file', () => {
         lineReader.on('line', (line) => {
             const result = /\/I:[0-9,]+/.exec(line);
             if (result !== null) {
-                result.forEach((value) => list = list.concat([value]));
+                result.forEach((value) => {
+                    list = list.concat([value])
+                });
             }
         });
         lineReader.on('close', () => {
-            expect(list.size).toBe(156);
+            expect(156).toBe(list.size);
+            expect(list.first()).toBe('/I:0,4107,4099,4099,4099,0,0,0,0,0,0');
+            expect(list.last()).toBe('/I:0,12297,12289,12289,12305,0,0,0,0,0,0');
         });
     });
 });
