@@ -10,7 +10,5 @@ commander
 
 console.log(`Parsing ${commander.file} with ${commander.regex}`);
 
-const extractRegex = new ExtractRegex();
-extractRegex.on('found', value => console.log(value));
-extractRegex.on('close', () => console.log('\nDone.'));
+const extractRegex = new ExtractRegex(value => console.log(value), () => console.log('\nDone.'));
 extractRegex.parseFile(commander.file, new RegExp(commander.regex));

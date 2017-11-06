@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test-cmd": "babel-node index.js -f .\\test\\Allflex_L1InkUnloadTrayProcessor_PLCBugOnReject.log -r .*",
+    "test-cmd-debug": "babel-node --inspect-brk index.js -f .\\test\\Allflex_L1InkUnloadTrayProcessor_PLCBugOnReject.log -r .*",
     "test": "jest",
     "test-watch": "npm test -- --watch"
   },

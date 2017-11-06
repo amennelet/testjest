@@ -1,8 +1,11 @@
-import EventEmitter from 'events';
 import readline from 'readline';
 import fs from 'fs';
 
-export default class extends EventEmitter {
+export default class ExtractRegex {
+    constructor(onFound, onClose) {
+        this.OnFound = onFound;
+        this.OnClose = onClose;
+    }
     parseFile(filePath, regex) {
         this.parse(fs.createReadStream(filePath), regex);
     }
@@ -11,12 +14,10 @@ export default class extends EventEmitter {
         lineReader.on('line', (line) => {
             const result = regex.exec(line);
             if (result !== null) {
-                result.forEach((value) => {
-                    super.emmit('found', value);
-                });
+                result.forEach(value => this.OnFound(value));
             }
         });
-        lineReader.on('close', () => super.emmit('close'));
+        lineReader.on('close', () => this.OnClose());
     }
 }
 
