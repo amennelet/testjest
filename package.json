@@ -6,7 +6,7 @@
   "scripts": {
     "test-cmd": "babel-node index.js -f .\\test\\Allflex_L1InkUnloadTrayProcessor_PLCBugOnReject.log -r .*",
     "test-cmd-debug": "babel-node --inspect-brk index.js -f .\\test\\Allflex_L1InkUnloadTrayProcessor_PLCBugOnReject.log -r .*",
-    "test": "jest",
+    "test": "jest --coverage",
     "test-watch": "npm test -- --watch"
   },
   "keywords": [],
@@ -16,7 +16,7 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "eslint": "^4.9.0",
+    "eslint": "^4.10.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
     "jest": "^21.2.1"
