@@ -24,7 +24,7 @@ describe('extracting regex from file', () => {
             }
         });
         lineReader.on('close', () => {
-            expect(156).toBe(list.size);
+            expect(list.size).toBe(156);
             expect(list.first()).toBe('/I:0,4107,4099,4099,4099,0,0,0,0,0,0');
             expect(list.last()).toBe('/I:0,12297,12289,12289,12305,0,0,0,0,0,0');
         });
@@ -35,7 +35,7 @@ describe('ExtractRegex', () => {
     it('filter lines with regex from read stream', () => {
         const list = [];
         const extractRegex = new ExtractRegex(value => list.push(value), () => {
-            expect(156).toBe(list.size);
+            expect(list.size).toBe(156);
             expect(list.first()).toBe('/I:0,4107,4099,4099,4099,0,0,0,0,0,0');
             expect(list.last()).toBe('/I:0,12297,12289,12289,12305,0,0,0,0,0,0');
         });
@@ -44,10 +44,11 @@ describe('ExtractRegex', () => {
     it('filter lines with regex from file path', () => {
         const list = [];
         const extractRegex = new ExtractRegex(value => list.push(value), () => {
-            expect(156).toBe(list.size);
+            expect(list.size).toBe(156);
             expect(list.first()).toBe('/I:0,4107,4099,4099,4099,0,0,0,0,0,0');
             expect(list.last()).toBe('/I:0,12297,12289,12289,12305,0,0,0,0,0,0');
         });
+
         extractRegex.parseFile(path.join(__dirname, 'Allflex_L1InkUnloadTrayProcessor_PLCBugOnReject.log'), /\/I:[0-9,]+/);
     });
 });
