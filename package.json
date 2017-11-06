@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test-cmd": "babel-node index.js -f .\\test\\Allflex_L1InkUnloadTrayProcessor_PLCBugOnReject.log -r .*",
-    "test-cmd-debug": "babel-node --inspect-brk index.js -f .\\test\\Allflex_L1InkUnloadTrayProcessor_PLCBugOnReject.log -r .*",
+    "parse": "babel-node index.js",
+    "test-cmd": "babel-node index.js -f .\\test\\Allflex_L1InkUnloadTrayProcessor_PLCBugOnReject.log -r \/I:[0-9,]+",
+    "test-cmd-debug": "babel-node --inspect-brk index.js -f .\\test\\Allflex_L1InkUnloadTrayProcessor_PLCBugOnReject.log -r \/I:[0-9,]+",
     "test": "jest --coverage",
     "test-watch": "npm test -- --watch"
   },
